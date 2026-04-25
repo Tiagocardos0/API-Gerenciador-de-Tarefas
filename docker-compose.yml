@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: gerrenciador_de_tarefas.db
+      POSTGRES_DB: gerenciador_de_tarefas
     volumes:
       - database:/bitnami/postgresql
 
