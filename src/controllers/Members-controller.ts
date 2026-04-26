@@ -45,6 +45,32 @@ class MembersController {
 
     return res.status(201).json({ message: "Member added to team successfully" });
   }
+
+  async delete(req: Request, res: Response) {
+    if (!req.user) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
+
+    const { id } = paramsSchema.parse(req.params);
+
+    const teamMember = await prisma.teamMember.findUnique({
+      where: { id },
+    });
+
+    if (!teamMember) {
+        return res.status(404).json({ message: "Team member not found" });
+  }
+
+    await prisma.teamMember.delete({
+      where: { id },
+    });
+
+    return res.status(200).json({ message: "Member removed from team successfully" });
+  }
 }
 
 export { MembersController };

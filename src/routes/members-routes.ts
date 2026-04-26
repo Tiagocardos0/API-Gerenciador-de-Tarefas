@@ -9,5 +9,6 @@ const membersController = new MembersController();
 
 membersRoutes.use(ensureAuthenticated, verifyUserAuthorization(['ADMIN']));
 membersRoutes.post("/", membersController.create);
+membersRoutes.delete("/:id", membersController.delete);
 
 export { membersRoutes };
