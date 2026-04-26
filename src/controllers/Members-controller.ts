@@ -46,6 +46,40 @@ class MembersController {
     return res.status(201).json({ message: "Member added to team successfully" });
   }
 
+  async show(req: Request, res: Response) {
+    if (!req.user) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    const paramsSchema = z.object({
+      teamId: z.uuid(),
+    });
+
+    const { teamId } = paramsSchema.parse(req.params);
+
+    const team = await prisma.team.findUnique({
+      where: { id: teamId },
+      select: {
+        id: true,
+        name: true,
+        teamMembers: {
+          select: {
+            id: true,
+            userId: true,
+            teamId: true,
+            createdAt: true,
+          }
+        }
+      }
+    });
+
+    if (!team) {
+      return res.status(404).json({ message: "Team not found" });
+    }
+
+    return res.status(200).json({ team });
+  }
+
   async delete(req: Request, res: Response) {
     if (!req.user) {
       return res.status(401).json({ message: "User not authenticated" });
