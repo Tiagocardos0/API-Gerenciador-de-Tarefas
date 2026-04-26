@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AppError } from "@/utils/AppError";
 import { prisma } from "@/database/prisma";
 import { z } from "zod";
+import { parse } from "node:path";
 
 class TeamsController {
   async create(req: Request, res: Response) {
@@ -43,10 +44,6 @@ class TeamsController {
       throw new AppError("User not authenticated", 401);
     }
 
-    if (req.user.role !== "ADMIN") {
-      throw new AppError("Access denied", 403);
-    }
-
     const teams = await prisma.team.findMany({
       select: {
         id: true,
@@ -63,11 +60,11 @@ class TeamsController {
       throw new AppError("User not authenticated", 401);
     }
 
-    if (req.user.role !== "ADMIN") {
-      throw new AppError("Access denied", 403);
-    }
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
 
-    const teamId = req.params.id as string;
+    const { id: teamId } = paramsSchema.parse(req.params);
 
     const bodySchema = z.object({
       name: z.string().min(2).max(100).trim(),
@@ -92,11 +89,11 @@ class TeamsController {
       throw new AppError("User not authenticated", 401);
     }
 
-    if (req.user.role !== "ADMIN") {
-      throw new AppError("Access denied", 403);
-    }
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
 
-    const teamId = req.params.id as string;
+    const { id: teamId } = paramsSchema.parse(req.params);
 
     const team = await prisma.team.findUnique({
       where: { id: teamId },
@@ -110,7 +107,7 @@ class TeamsController {
       where: { id: teamId },
     });
 
-    return res.status(200).json({ message: "Team deleted successfully" });
+    return res.status(204).json({ message: "Team deleted successfully" });
   }
 }
 
