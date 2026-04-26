@@ -1,13 +1,12 @@
 import { Response, Request } from "express";
 import { prisma } from "@/database/prisma";
 import { z } from "zod";
-import th from "zod/v4/locales/th.js";
 import { AppError } from "@/utils/AppError";
 
 class MembersController {
   async create(req: Request, res: Response) {
     if (!req.user) {
-      return res.status(401).json({ message: "User not authenticated" });
+      throw new AppError("Unauthorized", 401);
     }
 
     const bodySchema = z.object({
@@ -20,13 +19,13 @@ class MembersController {
     const user = await prisma.user.findUnique({ where: { id: userId } });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      throw new AppError("User not found", 404);
     }
 
     const team = await prisma.team.findUnique({ where: { id: teamId } });
 
     if (!team) {
-      return res.status(404).json({ message: "Team not found" });
+      throw new AppError("Team not found", 404);
     }
 
     const alreadyMember = await prisma.teamMember.findUnique({
@@ -36,7 +35,7 @@ class MembersController {
     });
 
     if (alreadyMember) {
-      return res.status(409).json({ message: "User is already a member of this team" });
+      throw new AppError("User is already a member of this team", 409);
     }
 
     await prisma.teamMember.create({
@@ -48,7 +47,7 @@ class MembersController {
 
   async show(req: Request, res: Response) {
     if (!req.user) {
-      return res.status(401).json({ message: "User not authenticated" });
+      throw new AppError("Unauthorized", 401);
     }
 
     const paramsSchema = z.object({
@@ -74,7 +73,7 @@ class MembersController {
     });
 
     if (!team) {
-      return res.status(404).json({ message: "Team not found" });
+      throw new AppError("Team not found", 404);
     }
 
     return res.status(200).json({ team });
@@ -82,7 +81,7 @@ class MembersController {
 
   async delete(req: Request, res: Response) {
     if (!req.user) {
-      return res.status(401).json({ message: "User not authenticated" });
+      throw new AppError("Unauthorized", 401);
     }
 
     const paramsSchema = z.object({
@@ -96,8 +95,8 @@ class MembersController {
     });
 
     if (!teamMember) {
-        return res.status(404).json({ message: "Team member not found" });
-  }
+      throw new AppError("Team member not found", 404);
+    }
 
     await prisma.teamMember.delete({
       where: { id },
