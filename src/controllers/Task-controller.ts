@@ -28,10 +28,7 @@ class TaskController {
       },
     });
 
-    return res.status(201).json({
-      message: "Task created successfully",
-      task,
-    });
+    return res.status(201).json({ task });
   }
 
   async index(req: Request, res: Response) {
@@ -86,10 +83,7 @@ class TaskController {
       data,
     });
 
-    return res.status(200).json({
-      message: "Task updated successfully",
-      task,
-    });
+    return res.status(200).json({ task });
   }
 
   async delete(req: Request, res: Response) {
@@ -107,9 +101,7 @@ class TaskController {
       where: { id },
     });
 
-    return res.status(200).json({
-      message: "Task deleted successfully",
-    });
+    return res.status(204).json();
   }
 }
 
