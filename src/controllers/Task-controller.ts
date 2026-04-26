@@ -12,7 +12,7 @@ class TaskController {
 
     const bodySchema = z.object({
       title: z.string().trim().min(1).max(255),
-      description: z.string().max(1024).optional(),
+      description: z.string().trim().max(1024).optional(),
       teamId: z.uuid(),
     });
 
@@ -83,6 +83,26 @@ class TaskController {
     return res.status(200).json({
       message: "Task updated successfully",
       task,
+    });
+  }
+
+  async delete(req: Request, res: Response) {
+    if (!req.user) {
+      throw new AppError("Unauthorized", 401);
+    }
+
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
+
+    const { id } = paramsSchema.parse(req.params);
+
+    await prisma.task.delete({
+      where: { id },
+    });
+
+    return res.status(200).json({
+      message: "Task deleted successfully",
     });
   }
 }
