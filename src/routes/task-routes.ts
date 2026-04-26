@@ -10,5 +10,6 @@ const taskRoutes = Router();
 taskRoutes.use(ensureAuthenticated, verifyUserAuthorization(["ADMIN", "MEMBER"]));
 
 taskRoutes.post('/', taskController.create);
+taskRoutes.get('/', taskController.show);
 
 export { taskRoutes };

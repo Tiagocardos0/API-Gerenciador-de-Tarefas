@@ -33,6 +33,23 @@ class TaskController {
       task,
     });
   }
+
+  async show(req: Request, res: Response) {
+    if (!req.user) {
+      throw new AppError("Unauthorized", 401);
+    }
+
+    const tasks = await prisma.task.findMany({
+      where: {
+        assignedUserId: req.user.id,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Tasks retrieved successfully",
+      tasks,
+    });
+  }
 }
 
 export { TaskController };
