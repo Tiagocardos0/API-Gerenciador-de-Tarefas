@@ -56,6 +56,31 @@ class TaskController {
     return res.status(200).json({ tasks });
   }
 
+  async history(req: Request, res: Response) {
+    if (!req.user) throw new AppError("Unauthorized", 401);
+
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
+
+    const { id } = paramsSchema.parse(req.params);
+
+    const task = await prisma.task.findUnique({ where: { id } });
+
+    if (!task) throw new AppError("Task not found", 404);
+
+    if (req.user.role === "MEMBER" && task.assignedUserId !== req.user.id) {
+      throw new AppError("Not allowed", 403);
+    }
+
+    const history = await prisma.taskHistory.findMany({
+      where: { taskId: id },
+      orderBy: { changedAt: "desc" },
+    });
+
+    return res.status(200).json({ history });
+  }
+
   async update(req: Request, res: Response) {
     if (!req.user) {
       throw new AppError("Unauthorized", 401);

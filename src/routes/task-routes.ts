@@ -13,5 +13,6 @@ taskRoutes.post('/', taskController.create);
 taskRoutes.get('/', taskController.index);
 taskRoutes.patch('/:id', taskController.update);
 taskRoutes.delete('/:id', taskController.delete);
+taskRoutes.get('/:id/history', taskController.history);
 
 export { taskRoutes };
