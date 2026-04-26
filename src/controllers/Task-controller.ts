@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
 import { z } from "zod";
-import { TaskStatus, Priority } from "@prisma/client";
 
 class TaskController {
   async create(req: Request, res: Response) {
