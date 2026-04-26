@@ -43,9 +43,11 @@ class TaskController {
 
     const { status, priority } = querySchema.parse(req.query);
 
+    const isAdmin = req.user.role === "ADMIN";
+
     const tasks = await prisma.task.findMany({
       where: {
-        assignedUserId: req.user.id,
+        ...(isAdmin ? {} : { assignedUserId: req.user.id }),
         status,
         priority,
       },
