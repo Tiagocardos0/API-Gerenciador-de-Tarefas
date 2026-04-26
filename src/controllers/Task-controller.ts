@@ -41,21 +41,20 @@ class TaskController {
 
     const querySchema = z.object({
       status: z.enum(["PENDING", "IN_PROGRESS", "COMPLETED"]).optional(),
+      priority: z.enum(["LOW", "MEDIUM", "HIGH"]).optional(),
     });
 
-    const { status } = querySchema.parse(req.query);
+    const { status, priority } = querySchema.parse(req.query);
 
     const tasks = await prisma.task.findMany({
       where: {
         assignedUserId: req.user.id,
         status,
+        priority,
       },
     });
 
-    return res.status(200).json({
-      message: "Tasks retrieved successfully",
-      tasks,
-    });
+    return res.status(200).json({ tasks });
   }
 
   async update(req: Request, res: Response) {
