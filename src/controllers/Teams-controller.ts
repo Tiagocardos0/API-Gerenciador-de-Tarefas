@@ -63,6 +63,10 @@ class TeamsController {
       throw new AppError("User not authenticated", 401);
     }
 
+    if (req.user.role !== "ADMIN") {
+      throw new AppError("Access denied", 403);
+    }
+
     const teamId = req.params.id as string;
 
     const bodySchema = z.object({
@@ -76,11 +80,37 @@ class TeamsController {
       where: { id: teamId },
       data: {
         name,
-        ...(description && { description }),
+        ...(description !== undefined && { description }),
       },
     });
 
     return res.status(200).json(team);
+  }
+
+  async delete(req: Request, res: Response) {
+    if (!req.user) {
+      throw new AppError("User not authenticated", 401);
+    }
+
+    if (req.user.role !== "ADMIN") {
+      throw new AppError("Access denied", 403);
+    }
+
+    const teamId = req.params.id as string;
+
+    const team = await prisma.team.findUnique({
+      where: { id: teamId },
+    });
+
+    if (!team) {
+      throw new AppError("Team not found", 404);
+    }
+
+    await prisma.team.delete({
+      where: { id: teamId },
+    });
+
+    return res.status(200).json({ message: "Team deleted successfully" });
   }
 }
 

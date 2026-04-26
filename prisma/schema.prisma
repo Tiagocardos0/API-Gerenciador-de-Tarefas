@@ -60,7 +60,7 @@ model TeamMember {
   teamId String @map("team_id")
 
   user User @relation(fields: [userId], references: [id])
-  team Team @relation(fields: [teamId], references: [id])
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
 
