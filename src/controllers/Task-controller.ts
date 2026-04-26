@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
-import { z } from "zod";
+import { toUpperCase, z } from "zod";
 
 class TaskController {
   async create(req: Request, res: Response) {
@@ -34,14 +34,21 @@ class TaskController {
     });
   }
 
-  async show(req: Request, res: Response) {
+  async index(req: Request, res: Response) {
     if (!req.user) {
       throw new AppError("Unauthorized", 401);
     }
 
+    const querySchema = z.object({
+      status: z.enum(["PENDING", "IN_PROGRESS", "COMPLETED"]).optional(),
+    });
+
+    const { status } = querySchema.parse(req.query);
+
     const tasks = await prisma.task.findMany({
       where: {
         assignedUserId: req.user.id,
+        status,
       },
     });
 
@@ -60,7 +67,8 @@ class TaskController {
       id: z.uuid(),
     });
 
-    const bodySchema = z.object({
+    const bodySchema = z
+      .object({
         title: z.string().trim().min(1).max(255).optional(),
         description: z.string().trim().max(1024).optional(),
         status: z.enum(["PENDING", "IN_PROGRESS", "COMPLETED"]).optional(),
