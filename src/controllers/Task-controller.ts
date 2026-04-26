@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
-import { toUpperCase, z } from "zod";
+import { z } from "zod";
 
 class TaskController {
   async create(req: Request, res: Response) {

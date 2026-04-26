@@ -6,7 +6,7 @@ import { z } from "zod";
 class TeamsController {
   async create(req: Request, res: Response) {
     if (!req.user) {
-      throw new AppError("Usuário não autenticado", 401);
+      throw new AppError("Unauthorized", 401);
     }
 
     const userId = req.user.id;
@@ -40,7 +40,7 @@ class TeamsController {
 
   async show(req: Request, res: Response) {
     if (!req.user) {
-      throw new AppError("User not authenticated", 401);
+      throw new AppError("Unauthorized", 401);
     }
 
     const teams = await prisma.team.findMany({
@@ -56,7 +56,7 @@ class TeamsController {
 
   async update(req: Request, res: Response) {
     if (!req.user) {
-      throw new AppError("User not authenticated", 401);
+      throw new AppError("Unauthorized", 401);
     }
 
     const paramsSchema = z.object({
@@ -85,7 +85,7 @@ class TeamsController {
 
   async delete(req: Request, res: Response) {
     if (!req.user) {
-      throw new AppError("User not authenticated", 401);
+      throw new AppError("Unauthorized", 401);
     }
 
     const paramsSchema = z.object({
