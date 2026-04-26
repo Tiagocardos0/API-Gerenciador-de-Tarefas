@@ -72,6 +72,9 @@ CREATE TABLE "task_history" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "teams_name_key" ON "teams"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "team_members_user_id_team_id_key" ON "team_members"("user_id", "team_id");
 
 -- CreateIndex
