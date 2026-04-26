@@ -37,6 +37,26 @@ class TeamsController {
       team,
     });
   }
+
+  async show(req: Request, res: Response) {
+    if (!req.user) {
+      throw new AppError("User not authenticated", 401);
+    }
+
+    if (req.user.role !== "ADMIN") {
+      throw new AppError("Access denied", 403);
+    }
+
+    const teams = await prisma.team.findMany({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+      },
+    });
+
+    return res.status(200).json(teams);
+  }
 }
 
 export { TeamsController };
