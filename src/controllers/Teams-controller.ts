@@ -57,6 +57,31 @@ class TeamsController {
 
     return res.status(200).json(teams);
   }
+
+  async update(req: Request, res: Response) {
+    if (!req.user) {
+      throw new AppError("User not authenticated", 401);
+    }
+
+    const teamId = req.params.id as string;
+
+    const bodySchema = z.object({
+      name: z.string().min(2).max(100).trim(),
+      description: z.string().max(255).optional(),
+    });
+
+    const { name, description } = bodySchema.parse(req.body);
+
+    const team = await prisma.team.update({
+      where: { id: teamId },
+      data: {
+        name,
+        ...(description && { description }),
+      },
+    });
+
+    return res.status(200).json(team);
+  }
 }
 
 export { TeamsController };
