@@ -78,12 +78,24 @@ class TaskController {
     const { id } = paramsSchema.parse(req.params);
     const data = bodySchema.parse(req.body);
 
-    const task = await prisma.task.update({
+    const task = await prisma.task.findUnique({
+      where: { id },
+    });
+
+    if (!task) {
+      throw new AppError("Task not found", 404);
+    }
+
+    if (req.user.role === "MEMBER" && task.assignedUserId !== req.user.id) {
+      throw new AppError("Not allowed", 403);
+    }
+
+    const updatedTask = await prisma.task.update({
       where: { id },
       data,
     });
 
-    return res.status(200).json({ task });
+    return res.status(200).json({ task: updatedTask });
   }
 
   async delete(req: Request, res: Response) {
@@ -97,11 +109,23 @@ class TaskController {
 
     const { id } = paramsSchema.parse(req.params);
 
+    const task = await prisma.task.findUnique({
+      where: { id },
+    });
+
+    if (!task) {
+      throw new AppError("Task not found", 404);
+    }
+
+    if (req.user.role === "MEMBER" && task.assignedUserId !== req.user.id) {
+      throw new AppError("Not allowed", 403);
+    }
+
     await prisma.task.delete({
       where: { id },
     });
 
-    return res.status(204).json();
+    return res.status(200).json();
   }
 }
 
