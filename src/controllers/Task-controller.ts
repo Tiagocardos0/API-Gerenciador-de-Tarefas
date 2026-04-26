@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
 import { z } from "zod";
+import { TaskStatus, Priority } from "@prisma/client";
 
 class TaskController {
   async create(req: Request, res: Response) {
@@ -48,6 +49,40 @@ class TaskController {
     return res.status(200).json({
       message: "Tasks retrieved successfully",
       tasks,
+    });
+  }
+
+  async update(req: Request, res: Response) {
+    if (!req.user) {
+      throw new AppError("Unauthorized", 401);
+    }
+
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
+
+    const bodySchema = z.object({
+        title: z.string().trim().min(1).max(255).optional(),
+        description: z.string().trim().max(1024).optional(),
+        status: z.enum(["PENDING", "IN_PROGRESS", "COMPLETED"]).optional(),
+        priority: z.enum(["LOW", "MEDIUM", "HIGH"]).optional(),
+      })
+      .refine((data) => Object.values(data).some((v) => v !== undefined), {
+        message:
+          "Please provide at least one field to update: title, description, status, or priority.",
+      });
+
+    const { id } = paramsSchema.parse(req.params);
+    const data = bodySchema.parse(req.body);
+
+    const task = await prisma.task.update({
+      where: { id },
+      data,
+    });
+
+    return res.status(200).json({
+      message: "Task updated successfully",
+      task,
     });
   }
 }
