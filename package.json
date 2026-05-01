@@ -10,7 +10,7 @@
     "dev": "tsx watch --env-file .env src/server.ts",
     "test:dev": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll --runInBand --verbose",
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js"
+    "start": "npx prisma migrate deploy && node build/server.js"
   },
   "author": "Tiago Cardoso",
   "license": "ISC",
