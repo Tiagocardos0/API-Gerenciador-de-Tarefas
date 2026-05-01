@@ -1,6 +1,7 @@
 <h1 align="center">API Rest - Gerenciador De Tarefas</h1>
-API REST para gerenciamento de tarefas com autenticação JWT, controle de permissões por perfil e histórico de alterações.
-<br>
+<div align="center">
+    API REST para gerenciamento de tarefas com autenticação JWT, controle de permissões por perfil e histórico de alterações. 
+</div>
 
 ## Tecnologias ##
 
@@ -17,43 +18,19 @@ API REST para gerenciamento de tarefas com autenticação JWT, controle de permi
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ## Como Rodar o Projeto ##
-
-**Opção 1 — Com Docker (recomendado)**
-
-Sobe a aplicação e o banco de dados juntos, sem precisar instalar o PostgreSQL localmente.<br><br>
-
-**configurar variáveis de ambiente**<br>
-`.env.example`
-
-**Suba os containers**<br>
-`docker compose up -d`
-
-**Rode as migrations**<br>
-`docker compose exec app npx prisma migrate dev`
-
-***
-
-**Opção 2 — Manualmente**<br>
-Pré-requisitos: Node.js e PostgreSQL instalados localmente.
-
-**instalar dependências**<br>
-`npm install`
-
-**configurar variáveis de ambiente**<br>
-`.env.example`
-
-**rodar migrations**<br>
-`npx prisma migrate dev`
-
-**iniciar servidor**<br>
-`npm run dev`
-
-**A API ficará disponível em:**<br>
-http://localhost:3333
+Pré-requisito: ter o Docker instalado.<br>
+**1. Configurar variáveis de ambiente**<br>
+`.env.example .env`<br>
+**2. Baixe as imagens e suba os containers**<br>
+`docker compose up -d --build`<br>
+ **3. Rodar migrations**<br>
+ `docker compose exec api npx prisma migrate dev`<br>
+ **4. Gere o Prisma Client**<br>
+ `docker compose exec api npx prisma generate`
 
 ## Variáveis de Ambiente ##
 Copie o arquivo **.env.example** e preencha os valores:
-`DATABASE_URL="postgresql://user:password@localhost:5432/banco_de_dados_db"`<br>
+`DATABASE_URL="postgresql://user:password@postgres:5432/banco_de_dados_db"`<br>
 `JWT_SECRET="sua_chave_secreta"`<br>
 `PORT= Porta da API`
 
@@ -134,4 +111,6 @@ Retorna o histórico de alterações de uma tarefa
 - Há um arquivo de rotas para importar no Insomnia na raiz do projeto.
 
 ## Autor ##
-Feito por `{ Tiago Cardoso }`
+Feito por `Tiago Cardoso`, Projeto desenvolvido para estudo e prática de backend.<br>
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tiago-cardoso-059b9529b/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Tiagocardos0)
