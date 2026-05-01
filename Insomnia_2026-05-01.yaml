@@ -20,7 +20,7 @@ collection:
         meta:
           id: req_495fb40d70fb482c81f40d7fd0646919
           created: 1777125935491
-          modified: 1777175126650
+          modified: 1777648314283
           isPrivate: false
           description: ""
           sortKey: -1777125935492
@@ -29,8 +29,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name":"joao",
-            	"email":"joao@email.com",
+            	"name":"tiago",
+            	"email":"tiago@email.com",
             	"password":"12345678"
             }
         headers:
@@ -53,7 +53,7 @@ collection:
         meta:
           id: req_beaf59ae44774506ac42f8ebacbadeff
           created: 1777158403982
-          modified: 1777231974004
+          modified: 1777648305568
           isPrivate: false
           description: ""
           sortKey: -1777158403982
@@ -93,7 +93,7 @@ collection:
         meta:
           id: req_91bc0e951f5f454b8935377efe652c37
           created: 1777163581287
-          modified: 1777177714610
+          modified: 1777642551711
           isPrivate: false
           description: ""
           sortKey: -1777163581287
@@ -129,7 +129,7 @@ collection:
         meta:
           id: req_902e62f3d5e944de8a66d0fc1ae7a5a5
           created: 1777168257049
-          modified: 1777169879912
+          modified: 1777642558879
           isPrivate: false
           description: ""
           sortKey: -1777168257049
@@ -151,12 +151,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.Base_URL }}/{{ _.Resource }}/7003dbe6-c254-4d42-9b75-0689a7bb3f29"
+      - url: "{{ _.Base_URL }}/{{ _.Resource }}/0f20d152-e33f-4973-a76a-4b6b9446dfb9"
         name: Rename teams
         meta:
           id: req_3f34c145cb054163be155d7e5ac7a597
           created: 1777169730570
-          modified: 1777229721423
+          modified: 1777646370328
           isPrivate: false
           description: ""
           sortKey: -1777169730570
@@ -187,12 +187,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.Base_URL }}/{{ _.Resource }}/95619024-ec8e-429a-94f9-b772817144d7"
+      - url: "{{ _.Base_URL }}/{{ _.Resource }}/96b2bf66-09ac-411d-8df4-8df74c085396"
         name: Delete teams
         meta:
           id: req_5433ce405bbc43e4814ce73506663571
           created: 1777170225816
-          modified: 1777177802405
+          modified: 1777646307435
           isPrivate: false
           description: ""
           sortKey: -1777170225816
@@ -229,7 +229,7 @@ collection:
         meta:
           id: req_d3cc98e796e14eccad763f4e7e985cee
           created: 1777174903174
-          modified: 1777229091535
+          modified: 1777646408365
           isPrivate: false
           description: ""
           sortKey: -1777174903174
@@ -238,8 +238,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"userId": "4558bc6f-aa84-4624-bcb2-5f13e1040d69",
-            	"teamId":"7003dbe6-c254-4d42-9b75-0689a7bb3f29"
+            	"userId": "d1e5739f-e8fb-4c2e-a20a-1a33aa775c20",
+            	"teamId":"0f20d152-e33f-4973-a76a-4b6b9446dfb9"
             }
         headers:
           - name: Content-Type
@@ -260,12 +260,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.Base_URL }}/{{ _.Resource }}/fc22c9fc-d79d-4443-808f-aed4a2b50ff6"
+      - url: "{{ _.Base_URL }}/{{ _.Resource }}/dd767a2c-a072-4c9d-9f07-4eaf5b613480"
         name: Delete Member
         meta:
           id: req_272f856752214143aa4f5d1b6a867832
           created: 1777175592099
-          modified: 1777176580572
+          modified: 1777646491177
           isPrivate: false
           description: ""
           sortKey: -1777175592099
@@ -287,12 +287,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.Base_URL }}/{{ _.Resource }}/7003dbe6-c254-4d42-9b75-0689a7bb3f29"
+      - url: "{{ _.Base_URL }}/{{ _.Resource }}/0f20d152-e33f-4973-a76a-4b6b9446dfb9"
         name: Show Member
         meta:
           id: req_ed27b10c1f61471b965f220f713b1481
           created: 1777176182859
-          modified: 1777176300206
+          modified: 1777646443724
           isPrivate: false
           description: ""
           sortKey: -1777176182859
@@ -329,7 +329,7 @@ collection:
         meta:
           id: req_04ba43ae52bc424f83e199c78f6e01a1
           created: 1777206838426
-          modified: 1777229671506
+          modified: 1777653165477
           isPrivate: false
           description: ""
           sortKey: -1777206838426
@@ -338,9 +338,9 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"title":"TASK DE TIAGO2",
-            	"description":"teste",
-            	"teamId":"7003dbe6-c254-4d42-9b75-0689a7bb3f29"
+            	"title":"TASK DE JOAO",
+            	"description":"teste2",
+            	"teamId": "5111a57a-1ae3-47e2-bca2-432ca08c71cb"
             }
         headers:
           - name: Content-Type
@@ -388,12 +388,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.Base_URL }}/{{ _.Resource }}/d01e743c-9a36-4abf-ac62-9d8d23e49fe0"
+      - url: "{{ _.Base_URL }}/{{ _.Resource }}/09be830d-94b5-4c92-91fa-846c8179fb27"
         name: Rename Tasks
         meta:
           id: req_342e0553788147e1b21bf82a6b1a4e73
           created: 1777212963435
-          modified: 1777232053620
+          modified: 1777646739724
           isPrivate: false
           description: ""
           sortKey: -1777212963435
@@ -423,12 +423,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.Base_URL }}/{{ _.Resource }}/103bebf1-d0a4-44df-a398-e0860453b7bf"
+      - url: "{{ _.Base_URL }}/{{ _.Resource }}/3b54b9ad-5dc4-48bd-bbdc-41ba08648102"
         name: Delete Task
         meta:
           id: req_0c18909d767a47abadb09c93b626711c
           created: 1777214228522
-          modified: 1777226787413
+          modified: 1777653207192
           isPrivate: false
           description: ""
           sortKey: -1777214228522
@@ -451,12 +451,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _.Base_URL }}/{{ _.Resource
-          }}/d01e743c-9a36-4abf-ac62-9d8d23e49fe0/history"
+          }}/09be830d-94b5-4c92-91fa-846c8179fb27/history"
         name: History Task
         meta:
           id: req_d0546aa63ab64891bb62ce2dc3646d39
           created: 1777231764743
-          modified: 1777232002703
+          modified: 1777646750995
           isPrivate: false
           description: ""
           sortKey: -1777231764743
@@ -504,3 +504,13 @@ environments:
       data:
         Base_URL: http://localhost:3333
       color: "#00ff1e"
+    - name: Prod
+      meta:
+        id: env_7b4050ff19364fe0b1b3cfb61965f09f
+        created: 1777608345139
+        modified: 1777642298245
+        isPrivate: false
+        sortKey: 1777608345139
+      data:
+        Base_URL: https://api-gerenciador-de-tarefas-ek78.onrender.com
+      color: "#ff0000"
