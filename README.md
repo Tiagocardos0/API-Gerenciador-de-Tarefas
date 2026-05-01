@@ -3,7 +3,7 @@
     API REST para gerenciamento de tarefas com autenticação JWT, controle de permissões por perfil e histórico de alterações. 
 </div>
 
-## Tecnologias ##
+## 🚀 Tecnologias ##
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -16,6 +16,14 @@
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![Supertest](https://img.shields.io/badge/Supertest-000000?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+## 🌐 Deploy ##
+
+**Base URL:**
+
+https://api-gerenciador-de-tarefas-ek78.onrender.com
+
+Hospedado na **Render**
 
 ## Como Rodar o Projeto ##
 Pré-requisito: ter o Docker instalado.<br>
@@ -40,16 +48,34 @@ A **API** utiliza JWT.
 
 Envie o token no header: Authorization: Bearer <token>
 
-## Usuários ##
+## 👤 Usuários ##
 
 - **POST /users**<br>
 Cria um novo usuário
 
-## Sessões ##
+**Body:**
+
+```json
+{
+  "name": "user",
+  "email": "user@email.com",
+  "password": "123456"
+}
+```
+
+## 🔐 Sessões ##
 - **POST /sessions**<br>
 Realiza login e retorna o token
 
-## Tarefas ##
+**Body**
+```json
+{
+  "email": "user@email.com",
+  "password": "123456"
+}
+```
+
+## 📋 Tarefas ##
 - **POST /tasks**<br>
 Cria uma nova tarefa
 - **GET /tasks**<br>
@@ -59,31 +85,31 @@ Atualiza uma tarefa
 - **DELETE /tasks/:id**<br>
 Remove uma tarefa
 
-## Times ##
+## 👥 Times ##
 - **POST /teams**<br>
 O Admin cria um novo time
 - **GET /teams**<br>
 O Admin vizualiza todos os times
-- **PUT /teams:id**<br>
+- **PUT /teams/:id**<br>
 O Admin edita o time (nome e descrição)
-- **DEL /teams:id**<br>
+- **DELETE /teams/:id**<br>
 O Admin deleta o time
 
-## Membros ##
+## 👤 Membros ##
 - **POST /members**<br>
 O Admin adiciona membros ao time
-- **GET / members**<br>
-O Admin vizualida todos os times com seus membros
-- **DEL /members:id**<br>
+- **GET /members**<br>
+O Admin vizualiza todos os times com seus membros
+- **DELETE /members/:id**<br>
 O Admin deleta membro do time
 
-## Histórico ##
+## 🕓 Histórico ##
 - **GET /tasks/:id/history**<br>
 Retorna o histórico de alterações de uma tarefa
 
 ## Regras de Negócio ##
 - Usuário precisa estar autenticado para acessar tarefas.
-- Usuários do tipo MEMBER só acessa, vizualida, edita e deleta suas próprias tarefas.
+- Usuários do tipo MEMBER só acessa, vizualiza, edita e deleta suas próprias tarefas.
 - ADMIN pode acessar e criar tudo.
 - Senhas são armazenadas com hash.
 
